@@ -1,0 +1,9 @@
+[[manager.prepend_keymap]]
+on = "H"
+run = "plugin duckdb --args=left"
+desc = "Scroll duckdb preview left"
+
+[[manager.prepend_keymap]]
+on = "L"
+run = "plugin duckdb --args=right"
+desc = "Scroll duckdb preview right"

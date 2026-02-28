@@ -1,0 +1,30 @@
+[user]
+    name = {{ .git_name | quote }}
+    email = {{ .git_email | quote }}
+
+[init]
+    defaultBranch = main
+
+[core]
+    editor = nvim
+    autocrlf = input
+
+[pull]
+    rebase = true
+
+[push]
+    autoSetupRemote = true
+
+[alias]
+    st = status
+    co = checkout
+    br = branch
+    ci = commit
+    lg = log --oneline --graph --decorate
+    last = log -1 HEAD
+
+[diff]
+    colorMoved = default
+
+[merge]
+    conflictstyle = diff3

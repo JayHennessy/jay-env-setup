@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# chezmoi:template: left-delimiter="{{" right-delimiter="}}"
+set -euo pipefail
+
+echo "==> Installing system prerequisites..."
+
+sudo apt-get update -qq
+sudo apt-get install -y -qq \
+    build-essential \
+    curl \
+    wget \
+    git \
+    zsh \
+    ripgrep \
+    fd-find \
+    xclip \
+    jq \
+    unzip \
+    fontconfig \
+    software-properties-common \
+    apt-transport-https \
+    ca-certificates \
+    gnupg \
+    lsb-release
+
+# Create fd symlink if it doesn't exist (Debian/Ubuntu names it fdfind)
+if command -v fdfind &>/dev/null && ! command -v fd &>/dev/null; then
+    sudo ln -sf "$(which fdfind)" /usr/local/bin/fd
+fi
+
+echo "==> System prerequisites installed."

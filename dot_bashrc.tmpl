@@ -1,0 +1,76 @@
+# ~/.bashrc - managed by chezmoi
+
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+# History
+HISTCONTROL=ignoreboth
+HISTSIZE=10000
+HISTFILESIZE=20000
+shopt -s histappend
+
+# Shell options
+shopt -s checkwinsize
+shopt -s globstar 2>/dev/null
+
+# Path
+export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$HOME/go/bin:$PATH"
+
+# Prompt
+PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+
+# mise
+if command -v mise &>/dev/null; then
+    eval "$(mise activate bash)"
+fi
+
+# fzf
+if command -v fzf &>/dev/null; then
+    eval "$(fzf --bash)"
+fi
+
+# Aliases
+if command -v nvim &>/dev/null; then
+    alias vim='nvim'
+    alias vi='nvim'
+    export EDITOR='nvim'
+fi
+
+if command -v lazygit &>/dev/null; then
+    alias lg='lazygit'
+fi
+
+if command -v lazydocker &>/dev/null; then
+    alias ld='lazydocker'
+fi
+
+if command -v k9s &>/dev/null; then
+    alias k='k9s'
+fi
+
+if command -v yazi &>/dev/null; then
+    alias y='yazi'
+fi
+
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# yy - yazi with directory change on exit
+yy() {
+    local tmp
+    tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+    yazi "$@" --cwd-file="$tmp"
+    if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+        builtin cd -- "$cwd" || return
+    fi
+    rm -f -- "$tmp"
+}
+
+# Source local overrides (not managed by chezmoi)
+if [ -f "$HOME/.bashrc.local" ]; then
+    . "$HOME/.bashrc.local"
+fi

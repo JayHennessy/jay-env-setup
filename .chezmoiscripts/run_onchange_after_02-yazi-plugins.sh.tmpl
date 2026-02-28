@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# package.toml hash: {{ include "dot_config/yazi/package.toml" | sha256sum }}
+
+export PATH="$HOME/.local/bin:$PATH"
+
+if ! command -v mise &>/dev/null; then
+    exit 0
+fi
+
+eval "$(mise activate bash)"
+
+if ! command -v ya &>/dev/null; then
+    echo "==> ya (yazi) not found, skipping plugin install."
+    exit 0
+fi
+
+echo "==> Installing yazi plugins..."
+ya pack -a wylie102/duckdb 2>/dev/null || true
+ya pack -i
+
+echo "==> Yazi plugins installed."

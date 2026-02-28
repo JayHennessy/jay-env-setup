@@ -1,0 +1,27 @@
+[manager]
+sort_by = "natural"
+sort_sensitive = false
+sort_reverse = false
+sort_dir_first = true
+show_hidden = false
+show_symlink = true
+
+[preview]
+max_width = 600
+max_height = 900
+
+[[plugin.prepend_previewers]]
+name = "*.csv"
+run = "duckdb"
+
+[[plugin.prepend_previewers]]
+name = "*.json"
+run = "duckdb"
+
+[[plugin.prepend_previewers]]
+name = "*.parquet"
+run = "duckdb"
+
+[[plugin.prepend_previewers]]
+name = "*.tsv"
+run = "duckdb"

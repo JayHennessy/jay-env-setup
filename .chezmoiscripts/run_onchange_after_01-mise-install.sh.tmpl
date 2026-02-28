@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# config.toml hash: {{ include "dot_config/mise/config.toml" | sha256sum }}
+
+export PATH="$HOME/.local/bin:$PATH"
+
+if ! command -v mise &>/dev/null; then
+    echo "==> mise not found, skipping tool installation."
+    exit 0
+fi
+
+echo "==> Running mise install (this may take a while)..."
+mise install -y
+
+echo "==> Installing pip-based tools..."
+if command -v mise &>/dev/null; then
+    eval "$(mise activate bash)"
+
+    # bpytop - resource monitor
+    if command -v pip &>/dev/null; then
+        pip install --user bpytop 2>/dev/null || true
+    fi
+
+    # sqltui - SQL TUI (Go)
+    if command -v go &>/dev/null; then
+        echo "    Installing sqltui..."
+        go install github.com/nicktrav/sqltui@latest 2>/dev/null || true
+    fi
+fi
+
+echo "==> mise tools installed."

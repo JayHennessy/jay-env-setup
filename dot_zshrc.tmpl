@@ -1,0 +1,71 @@
+# ~/.zshrc - managed by chezmoi
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# History
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=20000
+setopt appendhistory
+setopt hist_ignore_dups
+setopt hist_ignore_space
+
+# Path
+export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$HOME/go/bin:$PATH"
+
+# Prompt
+PROMPT='%F{green}%n@%m%f:%F{blue}%~%f$ '
+
+# mise
+if command -v mise &>/dev/null; then
+    eval "$(mise activate zsh)"
+fi
+
+# fzf
+if command -v fzf &>/dev/null; then
+    eval "$(fzf --zsh)"
+fi
+
+# Aliases
+if command -v nvim &>/dev/null; then
+    alias vim='nvim'
+    alias vi='nvim'
+    export EDITOR='nvim'
+fi
+
+if command -v lazygit &>/dev/null; then
+    alias lg='lazygit'
+fi
+
+if command -v lazydocker &>/dev/null; then
+    alias ld='lazydocker'
+fi
+
+if command -v k9s &>/dev/null; then
+    alias k='k9s'
+fi
+
+if command -v yazi &>/dev/null; then
+    alias y='yazi'
+fi
+
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# yy - yazi with directory change on exit
+yy() {
+    local tmp
+    tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+    yazi "$@" --cwd-file="$tmp"
+    if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+        builtin cd -- "$cwd" || return
+    fi
+    rm -f -- "$tmp"
+}
+
+# Source local overrides (not managed by chezmoi)
+if [ -f "$HOME/.zshrc.local" ]; then
+    . "$HOME/.zshrc.local"
+fi
