@@ -22,10 +22,13 @@ if command -v mise &>/dev/null; then
         pip install --user bpytop 2>/dev/null || true
     fi
 
-    # sqltui - SQL TUI (Go)
+    # Go-based tools
     if command -v go &>/dev/null; then
         echo "    Installing sqltui..."
         go install github.com/nicktrav/sqltui@latest 2>/dev/null || true
+
+        echo "    Installing lazyworktree..."
+        go install github.com/chmouel/lazyworktree/cmd/lazyworktree@latest 2>/dev/null || true
     fi
 fi
 
