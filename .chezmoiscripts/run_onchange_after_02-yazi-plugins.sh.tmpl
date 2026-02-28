@@ -17,7 +17,7 @@ if ! command -v ya &>/dev/null; then
 fi
 
 echo "==> Installing yazi plugins..."
-ya pack -a wylie102/duckdb 2>/dev/null || true
-ya pack -i
+ya pkg add wylie102/duckdb 2>/dev/null || true
+ya pkg install
 
 echo "==> Yazi plugins installed."
