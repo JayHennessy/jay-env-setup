@@ -4,28 +4,84 @@ set -euo pipefail
 
 echo "==> Installing system prerequisites..."
 
-sudo apt-get update -qq
-sudo apt-get install -y -qq \
-    build-essential \
-    curl \
-    wget \
-    git \
-    zsh \
-    ripgrep \
-    fd-find \
-    xclip \
-    jq \
-    unzip \
-    fontconfig \
-    software-properties-common \
-    apt-transport-https \
-    ca-certificates \
-    gnupg \
-    lsb-release
+install_apt() {
+    sudo apt-get update -qq
+    sudo apt-get install -y -qq \
+        build-essential \
+        curl \
+        wget \
+        git \
+        zsh \
+        ripgrep \
+        fd-find \
+        xclip \
+        jq \
+        unzip \
+        fontconfig \
+        software-properties-common \
+        apt-transport-https \
+        ca-certificates \
+        gnupg \
+        lsb-release
 
-# Create fd symlink if it doesn't exist (Debian/Ubuntu names it fdfind)
-if command -v fdfind &>/dev/null && ! command -v fd &>/dev/null; then
-    sudo ln -sf "$(which fdfind)" /usr/local/bin/fd
+    # Debian/Ubuntu names it fdfind
+    if command -v fdfind &>/dev/null && ! command -v fd &>/dev/null; then
+        sudo ln -sf "$(which fdfind)" /usr/local/bin/fd
+    fi
+}
+
+install_dnf() {
+    sudo dnf groupinstall -y "Development Tools"
+    sudo dnf install -y \
+        curl \
+        wget \
+        git \
+        zsh \
+        ripgrep \
+        fd-find \
+        xclip \
+        jq \
+        unzip \
+        fontconfig \
+        ca-certificates \
+        gnupg2 \
+        util-linux-user
+}
+
+install_yum() {
+    sudo yum groupinstall -y "Development Tools"
+    sudo yum install -y \
+        curl \
+        wget \
+        git \
+        zsh \
+        jq \
+        unzip \
+        fontconfig \
+        ca-certificates
+
+    # ripgrep and fd may not be in default yum repos
+    if ! command -v rg &>/dev/null; then
+        sudo yum install -y ripgrep 2>/dev/null || echo "    ripgrep not available via yum, will be available via mise/cargo"
+    fi
+    if ! command -v fd &>/dev/null; then
+        sudo yum install -y fd-find 2>/dev/null || echo "    fd-find not available via yum"
+    fi
+}
+
+# Detect package manager and install
+if command -v apt-get &>/dev/null; then
+    echo "==> Detected Debian/Ubuntu (apt)"
+    install_apt
+elif command -v dnf &>/dev/null; then
+    echo "==> Detected Fedora/RHEL/Amazon Linux (dnf)"
+    install_dnf
+elif command -v yum &>/dev/null; then
+    echo "==> Detected RHEL/Amazon Linux (yum)"
+    install_yum
+else
+    echo "ERROR: No supported package manager found (apt, dnf, yum)"
+    exit 1
 fi
 
 # Set zsh as default shell if it isn't already

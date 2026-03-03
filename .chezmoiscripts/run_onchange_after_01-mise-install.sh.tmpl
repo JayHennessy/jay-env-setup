@@ -22,6 +22,15 @@ if command -v mise &>/dev/null; then
         pip install --user bpytop 2>/dev/null || true
     fi
 
+    # npm-based tools
+    if command -v npm &>/dev/null; then
+        echo "    Installing tldr..."
+        npm install -g tldr 2>/dev/null || true
+
+        echo "    Installing Claude Code..."
+        npm install -g @anthropic-ai/claude-code 2>/dev/null || true
+    fi
+
     # Go-based tools
     if command -v go &>/dev/null; then
         echo "    Installing sqltui..."

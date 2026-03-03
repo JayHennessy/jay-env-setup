@@ -3,6 +3,17 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# Path
+export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$HOME/go/bin:$PATH"
+
+# oh-my-zsh
+if [ -d "$HOME/.oh-my-zsh" ]; then
+    export ZSH="$HOME/.oh-my-zsh"
+    ZSH_THEME="robbyrussell"
+    plugins=(git extract copypath copyfile zoxide)
+    source "$ZSH/oh-my-zsh.sh"
+fi
+
 # History
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
@@ -10,12 +21,6 @@ SAVEHIST=20000
 setopt appendhistory
 setopt hist_ignore_dups
 setopt hist_ignore_space
-
-# Path
-export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$HOME/go/bin:$PATH"
-
-# Prompt
-PROMPT='%F{green}%n@%m%f:%F{blue}%~%f$ '
 
 # mise
 if command -v mise &>/dev/null; then
@@ -25,6 +30,11 @@ fi
 # fzf
 if command -v fzf &>/dev/null; then
     eval "$(fzf --zsh)"
+fi
+
+# zoxide (fallback if not loaded by oh-my-zsh plugin)
+if command -v zoxide &>/dev/null && ! alias cd &>/dev/null; then
+    eval "$(zoxide init zsh)"
 fi
 
 # Aliases
