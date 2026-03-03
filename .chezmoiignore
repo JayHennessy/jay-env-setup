@@ -1,3 +1,14 @@
 README.md
 install.sh
 LICENSE
+aws-ssh-plan.md
+
+# SSH
+.ssh/known_hosts
+.ssh/known_hosts.old
+.ssh/sockets/
+
+# AWS
+.aws/cli/
+.aws/sso/
+.aws/old-config

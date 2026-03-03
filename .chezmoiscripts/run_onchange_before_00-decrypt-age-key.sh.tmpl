@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# chezmoi:template: left-delimiter="{{" right-delimiter="}}"
+set -euo pipefail
+
+# {{ include "key.txt.age" | sha256sum }}
+
+AGE_KEY_FILE="${HOME}/.config/chezmoi/key.txt"
+AGE_KEY_ENCRYPTED="{{ .chezmoi.sourceDir }}/key.txt.age"
+
+if [ -f "${AGE_KEY_FILE}" ]; then
+    echo "==> age key already decrypted at ${AGE_KEY_FILE}"
+    exit 0
+fi
+
+if [ ! -f "${AGE_KEY_ENCRYPTED}" ]; then
+    echo "ERROR: Encrypted age key not found at ${AGE_KEY_ENCRYPTED}"
+    echo "Run: age-keygen | age --encrypt --passphrase --output=${AGE_KEY_ENCRYPTED}"
+    exit 1
+fi
+
+echo "==> Decrypting age key (you will be prompted for your passphrase)..."
+mkdir -p "$(dirname "${AGE_KEY_FILE}")"
+age --decrypt --output "${AGE_KEY_FILE}" "${AGE_KEY_ENCRYPTED}"
+chmod 600 "${AGE_KEY_FILE}"
+echo "==> age key decrypted to ${AGE_KEY_FILE}"

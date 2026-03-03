@@ -1,0 +1,340 @@
+[default]
+region=ca-central-1
+output=json
+
+[profile kflow]
+region=ca-central-1
+mfa_serial=arn:aws:iam::876954890468:mfa/kflow
+
+
+[sso-session altis]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_registration_scopes=sso:account:access
+
+[profile security-admin]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=361558094183
+sso_role_name=AdministratorAccess
+
+[profile security-power]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=361558094183
+sso_role_name=PowerUserAccess
+
+[profile security-view]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=361558094183
+sso_role_name=ViewOnlyAccess
+
+[profile security-read]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=361558094183
+sso_role_name=ReadOnlyAccess
+
+[profile legacy-admin]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=817982026690
+sso_role_name=AdministratorAccess
+
+[profile legacy-power]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=817982026690
+sso_role_name=PowerUserAccess
+
+[profile legacy-view]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=817982026690
+sso_role_name=ViewOnlyAccess
+
+[profile legacy-read]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=817982026690
+sso_role_name=ReadOnlyAccess
+
+[profile bayer-admin]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=996593214453
+sso_role_name=AdministratorAccess
+
+[profile bayer-power]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=996593214453
+sso_role_name=PowerUserAccess
+
+[profile bayer-view]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=996593214453
+sso_role_name=ViewOnlyAccess
+
+[profile bayer-read]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=996593214453
+sso_role_name=ReadOnlyAccess
+
+[profile production-admin]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=812680818619
+sso_role_name=AdministratorAccess
+
+[profile production-power]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=812680818619
+sso_role_name=PowerUserAccess
+
+[profile production-view]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=812680818619
+sso_role_name=ViewOnlyAccess
+
+[profile production-read]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=812680818619
+sso_role_name=ReadOnlyAccess
+
+[profile dev-admin]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=507657012257
+sso_role_name=AdministratorAccess
+
+[profile dev-power]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=507657012257
+sso_role_name=PowerUserAccess
+
+[profile dev-view]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=507657012257
+sso_role_name=ViewOnlyAccess
+
+[profile dev-read]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=507657012257
+sso_role_name=ReadOnlyAccess
+
+[profile dev-sandbox-admin]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=785357510494
+sso_role_name=AdministratorAccess
+
+[profile dev-sandbox-power]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=785357510494
+sso_role_name=PowerUserAccess
+
+[profile dev-sandbox-view]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=785357510494
+sso_role_name=ViewOnlyAccess
+
+[profile dev-sandbox-read]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=785357510494
+sso_role_name=ReadOnlyAccess
+
+[profile genentech-admin]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=050451404849
+sso_role_name=AdministratorAccess
+
+[profile genentech-power]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=050451404849
+sso_role_name=PowerUserAccess
+
+[profile genentech-view]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=050451404849
+sso_role_name=ViewOnlyAccess
+
+[profile genentech-read]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=050451404849
+sso_role_name=ReadOnlyAccess
+
+[profile hhs-admin]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=864981714135
+sso_role_name=AdministratorAccess
+
+[profile hhs-power]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=864981714135
+sso_role_name=PowerUserAccess
+
+[profile hhs-view]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=864981714135
+sso_role_name=ViewOnlyAccess
+
+[profile hhs-read]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=864981714135
+sso_role_name=ReadOnlyAccess
+
+[profile jnj-admin]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=533267252155
+sso_role_name=AdministratorAccess
+
+[profile jnj-power]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=533267252155
+sso_role_name=PowerUserAccess
+
+[profile jnj-view]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=533267252155
+sso_role_name=ViewOnlyAccess
+
+[profile jnj-read]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=533267252155
+sso_role_name=ReadOnlyAccess
+
+[profile kflow-admin]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=876954890468
+sso_role_name=AdministratorAccess
+
+[profile kflow-power]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=876954890468
+sso_role_name=PowerUserAccess
+
+[profile kflow-view]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=876954890468
+sso_role_name=ViewOnlyAccess
+
+[profile kflow-read]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=876954890468
+sso_role_name=ReadOnlyAccess
+
+[profile merck-admin]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=us-east-2
+sso_account_id=811960609275
+sso_role_name=AdministratorAccess
+
+[profile merck-power]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=us-east-2
+sso_account_id=811960609275
+sso_role_name=PowerUserAccess
+
+[profile merck-view]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=us-east-2
+sso_account_id=811960609275
+sso_role_name=ViewOnlyAccess
+
+[profile merck-read]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=us-east-2
+sso_account_id=811960609275
+sso_role_name=ReadOnlyAccess
+
+[profile uhn-admin]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=842182727754
+sso_role_name=AdministratorAccess
+
+[profile uhn-power]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=842182727754
+sso_role_name=PowerUserAccess
+
+[profile uhn-view]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=842182727754
+sso_role_name=ViewOnlyAccess
+
+[profile uhn-read]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=842182727754
+sso_role_name=ReadOnlyAccess
+
+[profile uofc-admin]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=636812143092
+sso_role_name=AdministratorAccess
+
+[profile uofc-power]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=636812143092
+sso_role_name=PowerUserAccess
+
+[profile uofc-view]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=636812143092
+sso_role_name=ViewOnlyAccess
+
+[profile uofc-read]
+sso_start_url=https://d-9d676f77e5.awsapps.com/start
+sso_region=ca-central-1
+sso_account_id=636812143092
+sso_role_name=ReadOnlyAccess
+
+[profile bcc-admin]
+sso_start_url=https://bchealthcloud.awsapps.com/start/
+sso_region=ca-central-1
+sso_account_id=905417997053
+sso_role_name=Administrator
+region=ca-central-1
+
+[profile bccancer]
+sso_start_url = https://bchealthcloud.awsapps.com/start/#
+sso_region = ca-central-1
+sso_account_id = 905417997053
+sso_role_name = Administrator
+region = ca-central-1
+output = json
