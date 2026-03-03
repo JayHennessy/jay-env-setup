@@ -8,13 +8,13 @@ Reproducible dev environment using [chezmoi](https://www.chezmoi.io/) + [mise](h
 curl -fsSL https://raw.githubusercontent.com/JayHennessy/jay-env-setup/main/install.sh | bash
 ```
 
-This installs chezmoi, clones this repo, prompts for git name/email/GitHub username, then installs all tools and applies all configs.
+This installs chezmoi, clones this repo, installs all tools, and applies all configs. Supports Debian/Ubuntu, Fedora, RHEL, and Amazon Linux.
 
 ## What Gets Installed
 
-### Via mise (21 tools)
+### Via mise (23 tools)
 
-Python, Node.js, Bun, Go, GitHub CLI, AWS CLI, Google Cloud SDK, Terraform, s5cmd, DuckDB, uv, k9s, lazygit, lazydocker, yazi, process-compose, fzf, just, bottom, jq, Neovim
+Python, Node.js, Bun, Go, GitHub CLI, AWS CLI, Google Cloud SDK, Terraform, s5cmd, DuckDB, uv, k9s, lazygit, lazydocker, yazi, process-compose, fzf, just, bottom, jq, Neovim, zellij, tmux, zoxide, ripgrep
 
 ### Via other methods
 
@@ -27,12 +27,16 @@ Python, Node.js, Bun, Go, GitHub CLI, AWS CLI, Google Cloud SDK, Terraform, s5cm
 | taws, stu | `cargo install` |
 | gdrive | GitHub release binary |
 | bpytop | `pip install` |
-| System deps | `apt` (build-essential, zsh, ripgrep, fd-find, xclip) |
+| tldr | `npm install -g` |
+| Claude Code | `npm install -g @anthropic-ai/claude-code` |
+| lazyworktree | `go install` |
+| oh-my-zsh | `ohmyz.sh` install script |
+| System deps | `apt`/`dnf`/`yum` (build-essential, zsh, ripgrep, fd-find, xclip) |
 
 ## Configs Included
 
-- **Shell**: `.bashrc` and `.zshrc` with mise activation, fzf integration, aliases
-- **Git**: Templated `.gitconfig` with prompted identity
+- **Shell**: `.bashrc` and `.zshrc` with oh-my-zsh, mise activation, fzf, zoxide, aliases
+- **Git**: Templated `.gitconfig`
 - **Neovim**: LazyVim-based config with codediff.nvim plugin
 - **Yazi**: File manager with DuckDB previews for csv/json/parquet
 - **Kitty**: Terminal config
@@ -47,6 +51,7 @@ Python, Node.js, Bun, Go, GitHub CLI, AWS CLI, Google Cloud SDK, Terraform, s5cm
 | `k` | `k9s` |
 | `y` | `yazi` |
 | `yy` | yazi with cd-on-exit |
+| `lw` | `lazyworktree` |
 
 ## Updating
 
@@ -76,6 +81,7 @@ chezmoi apply
 | Add an apt package | `run_once_before_01-...` | Rename script or clear state |
 | Add a cargo tool | `run_once_before_05-...` | Rename script or clear state |
 | Change shell aliases | `dot_bashrc.tmpl` | `chezmoi apply` |
+| Add oh-my-zsh plugins | `dot_zshrc.tmpl` (plugins list) | `chezmoi apply` |
 | Change nvim/yazi/kitty config | Edit the file in `dot_config/` | `chezmoi apply` |
 
 ### mise tools
@@ -88,6 +94,36 @@ To pin a specific version, change `"latest"` to a version string:
 python = "3.12"
 node = "20"
 ```
+
+### oh-my-zsh plugins
+
+Plugins are configured in `dot_zshrc.tmpl` on the `plugins=(...)` line:
+
+```zsh
+plugins=(git extract copypath copyfile zoxide)
+```
+
+To add a plugin, append its name to the list. oh-my-zsh ships with many [built-in plugins](https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins) that just need to be listed here — no extra installation required. Some useful ones:
+
+| Plugin | What it does |
+|--------|-------------|
+| `git` | Git aliases and functions |
+| `extract` | `extract <file>` to unpack any archive format |
+| `copypath` | `copypath` copies current directory path to clipboard |
+| `copyfile` | `copyfile <file>` copies file contents to clipboard |
+| `zoxide` | Smarter `cd` that learns your most-used directories |
+| `docker` | Docker command completions |
+| `kubectl` | Kubectl completions and aliases |
+| `aws` | AWS CLI completions |
+| `terraform` | Terraform aliases and completions |
+
+For third-party plugins, clone the repo into `$ZSH_CUSTOM/plugins/` and add the name to the list. For example:
+
+```bash
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+```
+
+Then add `zsh-autosuggestions` to the plugins list in `dot_zshrc.tmpl` and run `chezmoi apply`.
 
 ### apt / cargo / other tools
 
